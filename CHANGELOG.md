@@ -1,7 +1,13 @@
+## 0.0.2
+
+ * piterjs: add jquery + highlight
+ * piterjs: первая часть доклада
+
+
 ## 0.0.1
 
-init piterjs
+ * init piterjs
 
 ## 0.0.0
 
-init with SPA hack
+ * init with SPA hack
