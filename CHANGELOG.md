@@ -1,3 +1,7 @@
+## 0.0.5
+
+ * piterjs: done!
+
 ## 0.0.4
 
  * piterjs: introduction is done!
