@@ -116,22 +116,20 @@ https://xakep.ru/2013/12/23/61798/
 
   1.3  Мониторинг через логирование
     1.3.1 интересно рассказано здесь о том как разделять логи по location и пр: https://www.youtube.com/watch?v=d8W4qJtRjDU
-    1.3.2 (???) еще про уведомления "с "обычного" ли места для этого пользователя запрос?".
+    //1.3.2 (???) еще про уведомления "с "обычного" ли места для этого пользователя запрос?".
 
-  1.4 nginxScript (https://www.nginx.com/resources/wiki/nginScript/)
+  //1.4 nginxScript (https://www.nginx.com/resources/wiki/nginScript/)
 
-2. интересные инструменты для мониторинга/аудита nginx и другого.
-  2.1 nginx-amplify ( https://www.nginx.com/blog/setting-up-nginx-amplify-in-10-minutes/ https://habrahabr.ru/post/305384/ )
-  2.2 еще https://habrahabr.ru/post/125206/
-
-
-
-  где поиграть:
-  https://sourceforge.net/projects/metasploitable/
+//2. интересные инструменты для мониторинга/аудита nginx и другого.
+  //2.1 nginx-amplify ( https://www.nginx.com/blog/setting-up-nginx-amplify-in-10-minutes/ https://habrahabr.ru/post/305384/ )
+  //2.2 еще https://habrahabr.ru/post/125206/
+  //где поиграть:
+  //https://sourceforge.net/projects/metasploitable/
 
 
-  ссылки:
+  links:
   1. http://www.ptsecurity.ru/upload/ptru/analytics/Web-Vulnerability-2016-rus.pdf
-  2. https://ru.wikipedia.org/wiki/Межсайтовый_скриптинг
-  3. https://stepik.org/course/Анализ-безопасности-веб-проектов-127
-  4. 
+  2. https://stepik.org/course/Анализ-безопасности-веб-проектов-127
+
+  links hidden:  
+  1. https://ru.wikipedia.org/wiki/Межсайтовый_скриптинг
