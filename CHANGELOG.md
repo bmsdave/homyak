@@ -1,3 +1,7 @@
+## 0.0.4
+
+ * piterjs: introduction is done!
+
 ## 0.0.3
 
  * piterjs: remove temporary sections
