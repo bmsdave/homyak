@@ -1,3 +1,7 @@
+TODO
+1. переименовать все в site.com и attakerhost.org
+2. поправить ширину запроса в header injection
+
 0. Введение
 
   	0.1 немного о безопасности  web.
@@ -53,7 +57,7 @@
 
 		0.4.2.3
 			## XSS:dom-base
-			http://site.com/index.html?<script>alert('!')</script>
+			http://site.com/index.html?<script>alert('xss')</script>
 			<script>
 				document.write(unescape(documant.location.href);
 			</script>
