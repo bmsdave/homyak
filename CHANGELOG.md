@@ -1,3 +1,7 @@
+## 0.0.6
+
+ * google analytics
+
 ## 0.0.5
 
  * piterjs: done!
