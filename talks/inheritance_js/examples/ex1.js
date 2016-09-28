@@ -1,20 +1,7 @@
-1. источники:
-
-хабр - https://habrahabr.ru/post/131714/
-Илья Кантор - https://learn.javascript.ru/class-inheritance
-Marijn Haverbeke "Выразительный Javascript" - https://karmazzin.gitbooks.io/eloquentjavascript_ru/content/chapters/chapter6.html
-Дуглас Крокфорд "Javascript сильные стороны" - https://vk.com/doc10903696_272054170
-
-
-# Наследование
-
-Наследование на уровне объектов в JavaScript, как мы видели, реализуется через ссылку __proto__.
-
-## Наследование Array от Object
-
 Object.prototype.dir = function(){console.dir(this)}
 
 function Animal (name) {
+    //console.log('test')
     this.name = name;
     this.speed = 0;
     this.hi = hi; 
@@ -79,3 +66,42 @@ cat.dir()
 
 // delete Object.prototype.hasOwnProperty
 
+typeof(dog)
+typeof(Animal)
+typeof null
+
+dog instanceof Animal
+dog instanceof Object
+
+function Rabbit(name) {
+  this.name = name;
+  this.speed = 0;
+  this.hi = function() {
+    this.speed++;
+    console.log( this.name + ' прыгает' );
+    }
+}
+
+Rabbit.prototype.hi = function() {
+  this.speed++;
+  console.log( this.name + ' прыгает' );
+};
+
+var rabbit = new Rabbit('Кроль');
+
+rabbit.dir()
+
+
+// не поддерживается в IE10-,
+Rabbit.prototype.__proto__ = Animal.prototype;
+
+rabbit.dir()
+
+Rabbit.prototype = Object.create(Animal.prototype);
+Rabbit.prototype.constructor = Rabbit;
+
+rabbit.dir()
+
+Rabbit.prototype = new Animal();
+
+rabbit.dir()
