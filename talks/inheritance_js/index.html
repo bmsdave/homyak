@@ -1,10 +1,103 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>bmsdave</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<title>Наследование в js</title>
+	
+	<link href="slideshow.css" rel="stylesheet" />
+	<link href="theme.css" rel="stylesheet" />
+	<link href="talk.css" rel="stylesheet" />
+	<link href="highlight.css" rel="stylesheet" />
+	<script src="prefixfree.min.js"></script>
+	<script src="jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
 </head>
-<body>
+<body data-duration="30">
+
+<header id="intro" class="slide">
+</header>
+<section>
+	<header class="slide">
+		
+	</header>
+
+	<section class="slide" title="">
+		<h2>0. Введение</h2>
+		<ul>
+			<li class="delayed emptyli">Наследование на уровне объектов в JavaScript реализуется через ссылку __proto__</li>
+			<li class="delayed emptyli">Методы классов хранятся в *.prototype.</li>
+			<li class="delayed emptyli">В prototype по умолчанию всегда находится свойство constructor, указывающее на функцию-конструктор</li>
+		</ul>
+	</section>
+
+	<section class="slide" title="">
+		<h2>1. Способы наследования</h2>
+		<ul>
+			<li class="delayed emptyli"><pre><code class='javascript'>Rabbit.prototype.__proto__ = Animal.prototype;</code></pre></li>
+			<li class="delayed emptyli"><pre><code class='javascript'>Rabbit.prototype = new Animal();</li>
+			<li class="delayed"><pre><code class='javascript'>Rabbit.prototype = Object.create(Animal.prototype);
+Rabbit.prototype.constructor = Rabbit;</code></pre></li>
+		</ul>
+	</section>
+
+
+	<section class="slide" title="">
+		<h2>2. Вызов конструктора родителя</h2>
+		<ul>
+			<li class="delayed emptyli"><pre><code class='javascript'>function Rabbit(name) {
+  Animal.apply(this, arguments);
+}</code></pre></li>
+		</ul>
+	</section>
+
+	<section class="slide" title="">
+		<h2>3. Переопределение метода</h2>
+		<ul>
+			<li class="delayed emptyli"><img height="1000px" src="img/class-inheritance-rabbit-run-animal.png" /></li>
+		</ul>
+	</section>
+
+	<section class="slide" title="">
+		<h2>4. Вызов метода родителя внутри своего</h2>
+		<ul>
+			<li class="delayed emptyli"><pre><code class='javascript'> Rabbit.prototype.run = function() {
+   // вызвать метод родителя, передав ему текущие аргументы
+   Animal.prototype.run.apply(this, arguments);
+   this.jump();
+ }</code></pre></li>
+		</ul>
+	</section>
+
+<footer class="slide" title="The End">
+	<h2>Ссылки:</h2>
+	<ul>
+		<li><a href="https://learn.javascript.ru/class-inheritance">Илья Кантор "Наследование классов в JavaScript"</a></li>
+		<li><a href="https://karmazzin.gitbooks.io/eloquentjavascript_ru/content/chapters/chapter6.html">Marijn Haverbeke "Выразительный Javascript"</a></li>	
+		<li><a href="https://vk.com/doc10903696_272054170">Дуглас Крокфорд "Javascript сильные стороны"</a></li>
+		<li><a href="https://habrahabr.ru/post/131714/">Javascript наследование для чайников</a></li>	
+	</ul>
+</footer>
+
+<script src="slideshow.js"></script>
+<script src="plugins/css-edit.js"></script>
+<script src="plugins/css-snippets.js"></script>
+<script src="plugins/css-controls.js"></script>
+<script src="plugins/code-highlight.js"></script>
+<script>
+var slideshow = new SlideShow();
+
+var snippets = document.querySelectorAll('.snippet');
+for(var i=0; i<snippets.length; i++) {
+	new CSSSnippet(snippets[i]);
+}
+
+var cssControls = document.querySelectorAll('.css-control');
+for(var i=0; i<cssControls.length; i++) {
+	new CSSControl(cssControls[i]);
+}
+</script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
