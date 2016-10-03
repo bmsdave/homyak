@@ -1,0 +1,1 @@
+typeof Object.prototype.constructor.prototype.constructor.prototype

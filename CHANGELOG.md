@@ -1,3 +1,11 @@
+## 0.0.7
+
+ * add talks inheritance in js / angular directive
+
+## 0.0.6
+
+ * google analytics
+
 ## 0.0.5
 
  * piterjs: done!
