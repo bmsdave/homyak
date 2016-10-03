@@ -24,59 +24,75 @@
     </header>
 
     <section class="slide" title="">
-        <h2>0. Введение</h2>
+        <h2>Последовательность выполнения</h2>
         <ul>
-            <li class="delayed emptyli">Наследование на уровне объектов в JavaScript реализуется через ссылку
-                __proto__
-            </li>
-            <li class="delayed emptyli">Методы классов хранятся в *.prototype.</li>
-            <li class="delayed emptyli">В prototype по умолчанию всегда находится свойство constructor, указывающее на
-                функцию-конструктор
-            </li>
+            <li class="delayed emptyli">compile</li>
+            <li class="delayed emptyli">controller</li>
+            <li class="delayed emptyli">compile-pre</li>
+            <li class="delayed emptyli">compile-post</li>
+        </ul>
+        <div class="delayed">
+        <a href="https://plnkr.co/edit/UKKyjZ?p=preview">https://plnkr.co/edit/UKKyjZ?p=preview</a>
+        <a href="https://plnkr.co/edit/JECF5i?p=preview">https://plnkr.co/edit/JECF5i?p=preview</a>
+        <a href="https://plnkr.co/edit/CxITXN?p=preview">https://plnkr.co/edit/CxITXN?p=preview</a>
+        </div>
+    </section>
+
+    <section class="slide" title="">
+        <h2>directive controller vs view controller</h2>
+        <ul>
+            <li class="delayed emptyli">directive controller:<pre><code class="javascript">controller: function($scope, $attrs) {</code></pre></li>
+            <li class="delayed emptyli">view controller: <pre><code class="html">ng-controller="MainCtrl"</code></pre></li>
+            <li class="delayed emptyli">Чем отличаются?</li>
+            <li class="delayed emptyli">Ничем =)</li>
         </ul>
     </section>
 
     <section class="slide" title="">
-        <h2>1. Способы наследования</h2>
+        <h2>Контроллер директивы vs link</h2>
         <ul>
             <li class="delayed emptyli">
-                <pre><code class='javascript'>Rabbit.prototype.__proto__ = Animal.prototype;</code></pre>
+                Во-первых, она вызывается позже контроллера. Последовательность вызовов такая: controller, preLink, postLink (postLink это и есть link. Подробнее в документации). Контроллер срабатывает даже раньше чем инициализируются директивы вложенных элементов. Поэтому в $scope, например, можно записать настройки для дочерних директив.
             </li>
             <li class="delayed emptyli">
-                <pre><code class='javascript'>Rabbit.prototype = new Animal();
+                Во-вторых, в link передается ссылка на контроллер.
             </li>
-            <li class="delayed"><pre><code class='javascript'>Rabbit.prototype = Object.create(Animal.prototype);
-Rabbit.prototype.constructor = Rabbit;</code></pre>
-            </li>
-        </ul>
-    </section>
-
-
-    <section class="slide" title="">
-        <h2>2. Вызов конструктора родителя</h2>
-        <ul>
-            <li class="delayed emptyli"><pre><code class='javascript'>function Rabbit(name) {
-  Animal.apply(this, arguments);
-}</code></pre>
+            <li class="delayed emptyli">
+                В-третьих, link всегда привязана к директиве, в то время как контроллер может быть общим. Думаю, в этом ключевое отличие.
             </li>
         </ul>
     </section>
 
     <section class="slide" title="">
-        <h2>3. Переопределение метода</h2>
+        <h2>Так что использовать?</h2>
         <ul>
-            <li class="delayed emptyli"><img height="1000px" src="img/class-inheritance-rabbit-run-animal.png"/></li>
+            <li class="delayed emptyli">
+                Я просто что-то делаю с шаблоном и scope
+            </li>
+            <li class="delayed ">
+                controller
+            </li>
+            <li class="delayed emptyli">
+                Я хочу поработать с DOM и прикрутить jquery-библиотеку
+            </li>
+            <li class="delayed ">
+                link
+            </li>
         </ul>
     </section>
 
     <section class="slide" title="">
-        <h2>4. Вызов метода родителя внутри своего</h2>
+        <h2>Зачем вообще нам контроллеры?</h2>
         <ul>
-            <li class="delayed emptyli"><pre><code class='javascript'> Rabbit.prototype.run = function() {
-   // вызвать метод родителя, передав ему текущие аргументы
-   Animal.prototype.run.apply(this, arguments);
-   this.jump();
- }</code></pre>
+            <li class="delayed emptyli">
+                Мы можем использовать такие удивительные вещи, как использование контроллер одной директивы в другой.
+                Мы просто задаем что-либо в this и используем это через require директивы
+            </li>
+            <li class="delayed emptyli">
+                Можно выделить два случая использования контроллеров: разделение общих методов между разными директивами, как работает, например, ngModelController в Ангуляре, и использование вложенными директивами данных родительской директивы, как работают табы, карусели и т.п., где есть родитель-контейнер и вложенные элементы. Если в первом случае контроллер работает как набор абстрактных методов, то во втором — может хранить в себе ссылку на список элементов, номер активного элемента, общее количество элементов и другую общую информацию. Конечно, для этой цели допустимо использование $scope, но, очевидно, оно будет не по назначению, т.к. область видимости нужна прежде всего для связывания контроллера с видом, а не для разделения общих данных.
+            </li>
+            <li class="delayed emptyli">
+                <a href="https://plnkr.co/edit/sESgzr?p=preview">https://plnkr.co/edit/sESgzr?p=preview</a>
             </li>
         </ul>
     </section>
@@ -84,12 +100,11 @@ Rabbit.prototype.constructor = Rabbit;</code></pre>
     <footer class="slide" title="The End">
         <h2>Ссылки:</h2>
         <ul>
-            <li><a href="https://learn.javascript.ru/class-inheritance">Илья Кантор "Наследование классов в
-                JavaScript"</a></li>
-            <li><a href="https://karmazzin.gitbooks.io/eloquentjavascript_ru/content/chapters/chapter6.html">Marijn
-                Haverbeke "Выразительный Javascript"</a></li>
-            <li><a href="https://vk.com/doc10903696_272054170">Дуглас Крокфорд "Javascript сильные стороны"</a></li>
-            <li><a href="https://habrahabr.ru/post/131714/">Javascript наследование для чайников</a></li>
+            <li><a href="https://docs.angularjs.org/api/ng/service/$compile">https://docs.angularjs.org/api/ng/service/$compile</a>
+            <li><a href="https://habrahabr.ru/post/232023/">https://habrahabr.ru/post/232023/</a>
+            <li><a href="https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#controllers">https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#controllers</a>
+            <li><a href="http://jasonmore.net/angular-js-directives-difference-controller-link/">http://jasonmore.net/angular-js-directives-difference-controller-link/</a>
+            <li><a href="http://stackoverflow.com/questions/15676614/angularjs-link-vs-compile-vs-controller">http://stackoverflow.com/questions/15676614/angularjs-link-vs-compile-vs-controller</a>
         </ul>
     </footer>
 
