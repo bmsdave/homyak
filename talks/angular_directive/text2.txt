@@ -55,8 +55,8 @@ http://codepen.io/bmsdave-1471718672/pen/pEdELr?editors=0010
 некоторые считают контроллеры синтакцическим сахаром к $compile
 
 
-0. https://docs.angularjs.org/api/ng/service/$compile
-1. https://habrahabr.ru/post/232023/
-2. https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#controllers
-3. http://jasonmore.net/angular-js-directives-difference-controller-link/
-4. http://stackoverflow.com/questions/15676614/angularjs-link-vs-compile-vs-controller
+<li><a href="https://docs.angularjs.org/api/ng/service/$compile">https://docs.angularjs.org/api/ng/service/$compile</a>
+<li><a href="https://habrahabr.ru/post/232023/">https://habrahabr.ru/post/232023/</a>
+<li><a href="https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#controllers">https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#controllers</a>
+<li><a href="http://jasonmore.net/angular-js-directives-difference-controller-link/">http://jasonmore.net/angular-js-directives-difference-controller-link/</a>
+<li><a href="http://stackoverflow.com/questions/15676614/angularjs-link-vs-compile-vs-controller">http://stackoverflow.com/questions/15676614/angularjs-link-vs-compile-vs-controller</a>

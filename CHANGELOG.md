@@ -1,3 +1,8 @@
+## 0.0.8
+
+ * complite angular directive
+ * refactoring
+
 ## 0.0.7
 
  * add talks inheritance in js / angular directive
