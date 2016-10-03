@@ -14,6 +14,7 @@ simple directive = http://plnkr.co/edit/HCFzn8fR5ohgTwp2YWhv?p=preview
 2.
 
 
+http://stackoverflow.com/questions/15676614/angularjs-link-vs-compile-vs-controller
 http://codepen.io/bmsdave-1471718672/pen/QKqRop
 http://jasonmore.net/angular-js-directives-difference-controller-link/
 https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#controllers
