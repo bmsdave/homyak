@@ -27,21 +27,25 @@
 		<h2>0. Введение</h2>
 		<ul>
 			<li class="delayed emptyli">Наследование на уровне объектов в JavaScript реализуется через ссылку __proto__</li>
-			<li class="delayed emptyli">Аттрибуты классов хранятся в *.prototype.</li>
+			<li class="delayed emptyli">Атрибуты классов хранятся в *.prototype.</li>
 			<li class="delayed emptyli">В prototype по умолчанию всегда находится свойство constructor, указывающее на функцию-конструктор</li>
 		</ul>
 	</section>
 
-	<section class="slide" title="">
-		<h2>1. Способы наследования</h2>
-		<ul>
-			<li class="delayed emptyli"><pre><code class='javascript'>Rabbit.prototype.__proto__ = Animal.prototype;</code></pre></li>
-			<li class="delayed emptyli"><pre><code class='javascript'>Rabbit.prototype = new Animal();</li>
-			<li class="delayed"><pre><code class='javascript'>Rabbit.prototype = Object.create(Animal.prototype);
-Rabbit.prototype.constructor = Rabbit;</code></pre></li>
-		</ul>
-	</section>
-
+    <section class="slide" title="">
+        <h2>1. Способы наследования</h2>
+        <ul>
+            <li class="delayed emptyli">
+                <pre><code class='javascript'>Rabbit.prototype.__proto__ = Animal.prototype;</code></pre>
+            </li>
+            <li class="delayed emptyli">
+                <pre><code class='javascript'>Rabbit.prototype = new Animal();</code></pre>
+            </li>
+            <li class="delayed"><pre><code class='javascript'>Rabbit.prototype = Object.create(Animal.prototype);
+Rabbit.prototype.constructor = Rabbit;</code></pre>
+            </li>
+        </ul>
+    </section>
 
 	<section class="slide" title="">
 		<h2>2. Вызов конструктора родителя</h2>
