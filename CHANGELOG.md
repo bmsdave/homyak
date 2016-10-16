@@ -1,3 +1,8 @@
+## 0.1.0
+
+ * init SPA 
+ * add resume
+
 ## 0.0.8
 
  * complite angular directive
