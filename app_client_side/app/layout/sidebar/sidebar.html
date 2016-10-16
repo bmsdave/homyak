@@ -1,0 +1,16 @@
+<button
+  ng-model="vm.$rootScope.toggleSidebar"
+  ng-click="vm.toggle()"
+  type="button"
+  class="c-hamburger c-hamburger--htla"
+  ng-class="{'is-active': !vm.hide}"
+>
+  <span>toggle menu</span>
+</button>
+<div ng-class="{'nav-hide': vm.hide}">
+  <nav>
+    <ul>
+      <li><a ui-sref="">test</a></li>
+    </ul>
+  </nav>
+</div>
