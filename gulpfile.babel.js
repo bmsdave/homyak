@@ -87,7 +87,7 @@ gulp.task('serve', () => {
 });
 
 // use webpack.config.js to build modules
-gulp.task('webpack', ['clean'], (cb) => {
+gulp.task('webpack', [], (cb) => {
   configProd.entry.app = paths.entry;
 
   webpack(configProd, (err, stats) => {
@@ -106,10 +106,10 @@ gulp.task('webpack', ['clean'], (cb) => {
 });
 
 gulp.task('clean', (cb) => {
-  del([paths.dest]).then((cleanPaths) => {
-    gutil.log('[clean]', cleanPaths);
-    cb();
-  });
+  // del([paths.dest]).then((cleanPaths) => {
+  //   gutil.log('[clean]', cleanPaths);
+  //   cb();
+  // });
 });
 
 
