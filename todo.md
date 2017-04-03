@@ -11,6 +11,7 @@
   
 ## features
   1. поиграть с web VR И tree.js
+  1.5 https://aframe.io/docs/0.5.0/introduction/
   2. поиграть с rust для бэка
   3. поиграть с пандас и tensorflow для data mining 
   
