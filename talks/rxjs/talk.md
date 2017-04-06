@@ -271,6 +271,3 @@ complete() - поток завершен.
 
 # примеры из rxmarbles.com
 http://rxmarbles.com/
-
-
-# примеры из rxmarbles.com
