@@ -4,10 +4,11 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Реактивный подход в разработке (RxJS)</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/theme/night.css">
+		<link rel="stylesheet" href="css/styles.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -24,8 +25,430 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section class="cool">
+					<h1>RxJS</h1>
+					<h3>Реактивный подход в разработке</h3>
+				</section>
+				<section>
+					<section>
+						<img src="./images/hell.gif" height="100%" width="100%"></img>
+					</section>
+					<section>
+						<img src="./images/callback-hell.jpg" height="100%" width="100%"></img>
+					</section>
+					<section>
+						<img src="./images/promise-hell.png" height="100%" width="100%"></img>
+					</section>
+					<section>
+						<h2>...</h2>
+					</section>
+					<section>
+						<h2>async await!</h2>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Парадигмы программирования</h2>
+						<img src="./images/ruwiki.png"></img>
+					</section>
+					<section>
+						<h4>Императивная (контрастирует с декларативной)</h4>
+						<ul>
+							<li>Процедурная</li>
+							<li>Структурная</li>
+							<li>Аспектно-ориентированная</li>
+							<li>Объектно-ориентированная</li>
+							<ul>
+								<li>Агентно-ориентированная</li>
+								<li>Компонентно-ориентированная</li>
+								<li>Прототипно-ориентированная</li>
+							</ul>
+							<li>Обобщённое программирование</li>
+						</ul>
+					</section>
+					<section>
+						<h4>Декларативная (контрастирует с императивной)</h4>
+							<ul>
+								<li>Чистота языка
+									<ul>
+										<li>Чистота функции</li>
+									</ul>
+								</li>	
+								<li>Функциональная
+								<ul> 
+									<li>В терминах Рефал-машины</li>
+									<li>Аппликативная</li>
+									<li>Комбинаторная</li>
+									<li>Бесточечная</li>
+										<ul><li>(чистая конкатенативная)</li></ul>
+								</ul>
+								</li>
+								<li>Логическая</li>
+							</ul>
+					</section>
+					<section>
+						<ul>
+							<li>Конкатенативная</li>
+							<li>Векторная</li>
+							<li>Метапрограммирование
+								<ul>
+									<li>Языково-ориентированная</li>
+									<ul>
+										<li>Предметно-ориентированная</li>
+										<li>Пользователями</li>
+									</ul>
+								</ul>
+							</li>
+							<li>Методы и алгоритмы
+								<ul>
+									<li>Автоматное</li>
+									<li>Динамическое</li>
+									<li>Потоков данных</li>
+									<li>Событийно-ориентированное</li>
+									<li>Реактивное</li>
+									<li>Сервис-ориентированное</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Грамотное/литературное программирование (Literate Programming)</h3>
+						<p>программа состоит из прозы на естественном языке вперемежку с макроподстановками и кодом на языках программирования</p>
+					</section>
+					<section>
+						<blockquote>
+							Давайте изменим традиционные приоритеты в создании программ: вместо представления о нашей задаче как о создании инструкций «Что делать?» для компьютера сконцентрируемся на объяснении другим людям описаний нашего видения того, что под управлением программы должен делать компьютер.
+							<br>— Дональд Кнут
+						</blockquote>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Реактивное программирование</h3>
+						<p>Реактивное программирование — парадигма программирования, ориентированная на потоки данных и распространение изменений.
+							Это означает, что должна существовать возможность легко выражать статические и динамические потоки данных, а также то,
+							что нижележащая модель исполнения должна автоматически распространять изменения благодаря потоку данных.
+						</p>
+						<!--К примеру, в императивном программировании присваивание a := b + c будет означать,
+						что переменной a будет присвоен результат выполнения операции b + c, используя текущие
+						(на момент вычисления) значения переменных. Позже значения переменных b и c могут быть
+						изменены без какого-либо влияния на значение переменной a.
+
+						В реактивном же программировании значение a будет автоматически пересчитано, основываясь
+						на новых значениях.
+
+						Современные табличные процессоры представляют собой пример реактивного программирования.
+						Ячейки таблицы могут содержать строковые значения или формулу вида «=B1+C1», значение
+						которой будет вычислено исходя из значений соответствующих ячеек. Когда значение одной
+						из зависимых ячеек будет изменено, значение этой ячейки будет автоматически обновлено.
+
+						Другой пример — это языки описания аппаратуры (HDL), такие как Verilog. Реактивное
+						программирование позволяет моделировать изменения в виде их распространения внутри модели.
+
+						Реактивное программирование предлагалось как путь для лёгкого создания пользовательских
+						интерфейсов, анимации или моделирования систем, изменяющихся во времени.
+
+						К примеру, в MVC архитектуре с помощью реактивного программирования можно реализовать
+						автоматическое отражение изменений из Model в View и наоборот из View в Model.-->						
+					</section>
+					<section>
+						<h3> Реактивные подходы к программированию</h3>
+					</section>
+					<section>
+						<h3>Императивное реактивное программирование</h3>
+						<p>
+							Можно соединить парадигмы реактивного и императивного программирования.
+							В такой связке императивные программы могли бы работать над реактивными структурами данных.
+						</p>
+					</section>
+					<section>
+						<h3>Объектно-ориентированное реактивное программирование</h3>
+						<p>
+							Объектно-ориентированное реактивное программирование (ООРП) — это комбинация
+							объектно-ориентированного подхода с реактивным. Вероятно, наиболее естественный
+							способ сделать это состоит в том, что вместо методов и полей, у объектов есть
+							реакции, которые автоматически пересчитывают значения и другие реакции зависят от изменений этих значений.
+						</p>
+					<!--<section>
+						<h3> Object-oriented reactive programming </h3>
+						<p>Instead of methods and fields, objects have reactions that automatically re-evaluate when the other reactions they depend on have been modified.</p>
+					</section>-->
+					</section>
+					<section>	
+						<h3>Функциональное реактивное программирование</h3>
+						<p>
+							Функциональное программирование является наиболее естественным базисом для реализации реактивной
+							архитектуры, хорошо сочетаясь с параллелизмом.
+							
+							Функциональное реактивное программирование (ФРП) сформировалось в 1997 году, с предложением языка Fran.
+							Позже были разработаны такие языки как Fruit, FRP и RT-FRP, FAL, Frob, Fvision, Yampa.
+							Простейшее функциональное реактивное выражение имеет следующую форму:
+							```
+							b1 `until` e => b2
+							```
+							что буквально означает «вести себя как b1 до возникновения события e, после этого вести себя как b2».
+						</p>
+					</section>
+					<!--<section>
+						<h3> Functional reactive programming </h3>
+						<p> Functional Reactive Programming is a variant of Reactive Programming that follows Functional Programming principles such as referential transparency, and seeks to be purely functional. </p>
+						<a href="https://medium.com/@andrestaltz/why-i-cannot-say-frp-but-i-just-did-d5ffaa23973b#.8sx7elq7v">Why I cannot say FRP but I just did</a>
+					</section>-->
+				</section>
+				<section>	
+					<section>
+						<h3>Реализации в JS:</h3>
+						<ul>
+							<li class="fragment"> <strong> Bacon.js </strong> </li>
+							<li class="fragment"> <strong> Cycle.js </strong> </li>
+							<li class="fragment"> <strong> Elm </strong> </li>
+							<li class="fragment"> <strong> Kefir </strong></li>
+							<li class="fragment"> <strong> RxJS </strong> </li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>ReactiveX</h2>
+						<p class="fragment">ReactiveX is more than an API, it's an idea and a breakthrough in programming. It has inspired several other APIs, frameworks, and even programming languages.</p>
+					</section>
+					<section>
+						<h4 id="languages">Languages</h4>
+
+						<ul>
+							<li>Java: <a href="https://github.com/ReactiveX/RxJava">RxJava</a></li>
+							<li>JavaScript: <a href="https://github.com/Reactive-Extensions/RxJS">RxJS</a></li>
+							<li>C#: <a href="https://github.com/Reactive-Extensions/Rx.NET">Rx.NET</a></li>
+							<li>C#(Unity): <a href="https://github.com/neuecc/UniRx">UniRx</a></li>
+							<li>Scala: <a href="https://github.com/ReactiveX/RxScala">RxScala</a></li>
+							<li>Clojure: <a href="https://github.com/ReactiveX/RxClojure">RxClojure</a></li>
+							<li>C++: <a href="https://github.com/Reactive-Extensions/RxCpp">RxCpp</a></li>
+							<li>Ruby: <a href="https://github.com/Reactive-Extensions/Rx.rb">Rx.rb</a></li>
+							<li>Python: <a href="https://github.com/ReactiveX/RxPY">RxPY</a></li>
+							<li>Groovy: <a href="https://github.com/ReactiveX/RxGroovy">RxGroovy</a></li>
+							<li>JRuby: <a href="https://github.com/ReactiveX/RxJRuby">RxJRuby</a></li>
+							<li>Kotlin: <a href="https://github.com/ReactiveX/RxKotlin">RxKotlin</a></li>
+							<li>Swift: <a href="https://github.com/kzaher/RxSwift">RxSwift</a></li>
+							<li>PHP: <a href="https://github.com/ReactiveX/RxPHP">RxPHP</a></li>
+						</ul>
+					</section>
+					<section>
+						<h4 id="reactivex-for-platforms-and-frameworks">ReactiveX for platforms and frameworks</h4>
+
+						<ul>
+							<li><a href="https://github.com/ReactiveX/RxNetty">RxNetty</a></li>
+							<li><a href="https://github.com/ReactiveX/RxAndroid">RxAndroid</a></li>
+							<li><a href="https://github.com/kzaher/RxSwift">RxCocoa</a></li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>RxJS</h2>
+						<p>Set of libraries to compose asynchronous and event-based programs using observable collections and Array#extras style composition in JavaScript</p>
+					</section>
+					<section>
+						<h3>RxJS 4.0 vs 5.0</h3>
+						<p>RxJS 5 is a ground-up rewrite of RxJS that actually began development when RxJS was in 2.0. This new version of RxJS had
+three basic goals:</p>
+						<ol>
+							<li>Better performance</li>
+							<li>Better debugging</li>
+							<li>Compliance with the <a href="https://github.com/zenparsing/es-observable">ES7 Observable Spec</a></li>
+						</ol>
+					</section>
+					<section>
+						<h3>Differences:</h3>
+						<ul>
+							<li>Observer Interface Changes (.onNext(value) -> .next(value))</li>
+							<li>Subscription dispose is unsubscribe</li>
+							<li>Operators Renamed or Removed (flatMapLatest -> switchMap, where -> filter)</li>
+							<li>Operator Splits (map -> map and mapTo)</li>
+						</ul>
+						<br><br><br>
+						<a href="https://github.com/ReactiveX/rxjs/blob/master/MIGRATION.md" target="_blank"> Migrating from RxJS 4 to 5 </a>
+					</section>
+					<section>
+						<p>The essential concepts in RxJS which solve async event management are:</p>
+						<ul>
+							<li class="fragment"><strong>Observable:</strong> represents the idea of an invokable collection of future values or events.</li>
+							<li class="fragment"><strong>Observer:</strong> is a collection of callbacks that knows how to listen to values delivered by the Observable.</li>
+							<li class="fragment"><strong>Subscription:</strong> represents the execution of an Observable, is primarily useful for cancelling the execution.</li>
+							<li class="fragment"><strong>Operators:</strong> are pure functions that enable a functional programming style of dealing with collections with operations like <code>map</code>, <code>filter</code>, <code>concat</code>, <code>flatMap</code>, etc.</li>
+							<li class="fragment"><strong>Subject:</strong> is the equivalent to an EventEmitter, and the only way of multicasting a value or event to multiple Observers.</li>
+							<li class="fragment"><strong>Schedulers:</strong> are centralized dispatchers to control concurrency, allowing us to coordinate when computation happens on e.g. <code>setTimeout</code> or <code>requestAnimationFrame</code> or others.</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h1>Observable</h1>
+						<video src="./observable.webm" autoplay loop>
+							Your browser does not support the <code>video</code> element.
+						</video>
+					</section>
+					<section>
+						<h3>Creating observable</h3>
+							<pre><code class="hljs javascript">
+var observable = Rx.Observable.create(function (observer) {
+  observer.next(1);
+  observer.next(2);
+  observer.next(3);
+  setTimeout(() => {
+    observer.next(4);
+    observer.complete();
+  }, 1000);
+});
+							</code></pre>
+					</section>
+					<section>
+						<h3>Subscribing observable</h3>
+							<pre><code class="hljs javascript">
+observable.subscribe(
+  (x) => console.log('got value ' + x),
+  (err) => console.error('something wrong occurred: ' + err),
+  () => console.log('done')
+);
+							</code></pre>
+						<a href="https://embed.plnkr.co/X3785Q5lUq0SThnr2jOK/"  target="_blank">Source</a>
+					</section>
+					<section>
+						<h3>Observables can be created from:</h3>
+						<ul>
+							<li class="fragment">Array</li>
+							<li class="fragment">Array-like object (e.g. DOM elements)</li>
+							<li class="fragment">Event</li>
+							<li class="fragment">Iterable object</li>
+							<li class="fragment">Observable-like</li>
+							<li class="fragment">Promise</li>
+						</ul>
+						<a class="fragment" href="http://embed.plnkr.co/AANaOLWcVfStpzJMHhyh/" target="_blank"> Create from event </a>
+					</section>
+				</section>
+				<section>
+					<h2>Observable vs Promise</h2>
+					<ul>
+						<li class="fragment">Observables are cancellable</li>
+						<!--<li class="fragment">Observables can be retried</li>-->
+						<li class="fragment">Observables are not executed without observer</li>
+						<li class="fragment">Observables have operators</li>
+					</ul>
+					<a class="fragment" href="https://plnkr.co/edit/IqexueV4QKT7JgDOcudA?p=preview" target="_blank"> Source </a>
+				</section>
+				<section>
+					<section>
+						<h2>Cold vs hot observable</h2>
+						<p class="fragment">Producer - source of values for observable.</p>
+					</section>
+					<section>
+						<h3>Cold observable</h3>
+						<ol class="postList">
+							<li class="fragment">creates the producer</li>
+							<li class="fragment">activates the producer</li>
+							<li class="fragment">starts listening to the producer</li>
+							<li class="fragment">unicast</li></ol>
+					</section>
+					<section>
+						<h3>Hot observable</h3>
+						<ol class="postList">
+							<li class="fragment">shares a reference to a producer</li>
+							<li class="fragment">starts listening to the producer</li>
+							<li class="fragment">multicast</li>
+					</section>
+					<section>
+						<div>
+							<h5> Cold observable </h5>
+							<pre><code class="hljs javascript">
+const source = new Observable((observer) => {
+  const socket = new WebSocket('ws://someurl');
+  socket.addEventListener('message', (e) => observer.next(e));
+  return () => socket.close();
+});
+							</code></pre>
+						</div>
+						<br><br>
+						<div class="fragment">
+							<h5> Hot observable </h5>
+							<pre><code class="hljs javascript">
+const socket = new WebSocket('ws://someurl');
+const source = new Observable((observer) => {
+  socket.addEventListener('message', (e) => observer.next(e));
+});
+							</code></pre>
+						</div>
+						<a class="fragment" href="https://plnkr.co/edit/s2vriUDpbtqEPk1t1IZv?p=preview" target="_blank"> Http Angular 2 </a>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Most useful operators</h2>
+					</section>
+					<section>
+						<h3>map</h3>
+						<p>Like <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">Array.prototype.map()</a>,
+it passes each source value through a transformation function to get
+corresponding output values.</p>
+						<img src="images/map.png">
+					</section>
+					<section>
+						<h3>filter</h3>
+						<p>Like <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">Array.prototype.filter()</a>,
+							it only emits a value from the source if it passes a criterion function.
+						</p>
+						<img src="images/filter.png">
+					</section>
+					<section>
+						<h3>scan</h3>
+						<p>It's like reduce, but emits the current accumulation whenever the source emits a value.</p>
+						<img src="images/scan.png">
+					</section>
+					<section>
+						<h3>do</h3>
+						<p>Intercepts each emission on the source and runs a function, but returns an output which is identical to the source.</p>
+						<img src="images/do.png">
+						<a href="http://plnkr.co/edit/7JZyZeWHxIGQCMS5Zvud?p=preview" target="_blank"> Source </a>
+					</section>
+					<section>
+						<h3>withLatestFrom</h3>
+						<p>Whenever the source Observable emits a value, it computes a formula using that value plus the latest values from other input Observables, then emits the output of that formula.</p>
+						<img style="height: 25rem;" src="images/withLatestFrom.png">
+					</section>
+					<section>
+						<h3>combineLatest</h3>
+						<p>Whenever any input Observable emits a value, it computes a formula using the latest values from all the inputs, then emits the output of that formula.
+						<a href="http://plnkr.co/edit/ZUCMSiqhsKdawUieYf3C?p=preview" target="_blank"> Source </a> </p>
+						<img style="height: 25rem;" src="images/combineLatest.png">
+					</section>
+					<section>
+						<h3>switchMap (flatMapLatest in RxJS 4)</h3>
+						<p>Maps each value to an Observable, then flattens all of
+these inner Observables using <a href="http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-switch">switch</a> <a href="http://plnkr.co/edit/W7ii4Tp7WtOBYhopJbO2?p=preview target="_blank"> Source </a></p>
+						<img style="height: 25rem;" src="images/switchMap.png">
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>What's next?</h2>
+						<ul>
+							<li class="fragment"><a href="https://gist.github.com/staltz/868e7e9bc2a7b8c1f754">The introduction to Reactive Programming you've been missing</a></li>
+							<li class="fragment"><a href="http://reactivex.io/learnrx/">Functional Programming in Javascript</a></li>
+							<li class="fragment"><a href="https://github.com/ngrx/router">Reactive Router for Angular 2</a></li>
+							<li class="fragment"><a href="https://github.com/ngrx/store">RxJS powered state management for Angular2 apps, inspired by Redux</a></li>
+							<li class="fragment"><a href="https://github.com/Reactive-Extensions/rx.angular.js/">AngularJS Bindings for RxJS</a></li>
+							<li class="fragment"><a href="http://staltz.com/">Andre Staltz webpage</a></li>
+							<li class="fragment"><a href="https://www.youtube.com/watch?v=COviCoUtwx4">Netflix JavaScript Talks - RxJS Version 5</a></li>
+						</ul>
+					</section>
+					<section>
+						<h2>Resources</h2>
+						<ul>
+							<li class="fragment"><a href="http://reactivex.io/">Official ReactiveX page</a></li>
+							<li class="fragment"><a href="http://reactivex.io/rxjs/">Official RxJS 5 documentation</a></li>
+							<li class="fragment"><a href="https://github.com/Reactive-Extensions/RxJS/tree/master/doc">Official RxJS 4 documentation on github repo</a></li>
+							<li class="fragment"><a href="http://rxmarbles.com/">Interactive diagrams of Rx Observables</a></li>
+						</ul>
+					</section>
+				</section>
 			</div>
 		</div>
 
