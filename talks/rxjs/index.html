@@ -296,15 +296,15 @@ var observable = Rx.Observable.create(function (observer) {
 						<h3>Создание observable из event</h3>
 							<pre><code class="hljs javascript">
 window.onload = function() {
-  var input = document.querySelector('button');
+  var button = document.querySelector('button');
   
-  var observable = Rx.Observable.fromEvent(input,  'click');
+  var observable = Rx.Observable.fromEvent(button,  'click');
   
   observable.subscribe((event) => {
     console.log('Observable: ', event);
   });
 
-  input.addEventListener('click', (event) => {
+  button.addEventListener('click', (event) => {
     console.log('Event listener: ', event);
   });
 }
