@@ -25,7 +25,7 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section class="cool">
+				<section>
 					<h1>RxJS</h1>
 					<h3>Реактивный подход в разработке</h3>
 				</section>
@@ -125,9 +125,7 @@
 				<section>
 					<section>
 						<h3>Реактивное программирование</h3>
-						<p>Реактивное программирование — парадигма программирования, ориентированная на потоки данных и распространение изменений.
-							Это означает, что должна существовать возможность легко выражать статические и динамические потоки данных, а также то,
-							что нижележащая модель исполнения должна автоматически распространять изменения благодаря потоку данных.
+						<p>Парадигма, ориентированная на потоки данных и распространение изменений.
 						</p>
 						<!--К примеру, в императивном программировании присваивание a := b + c будет означать,
 						что переменной a будет присвоен результат выполнения операции b + c, используя текущие
@@ -156,16 +154,12 @@
 					</section>
 					<section>
 						<h3>Императивное реактивное программирование</h3>
-						<p>
-							Можно соединить парадигмы реактивного и императивного программирования.
-							В такой связке императивные программы могли бы работать над реактивными структурами данных.
+						<p>Императивные программы могли бы работать над реактивными структурами данных.
 						</p>
 					</section>
 					<section>
 						<h3>Объектно-ориентированное реактивное программирование</h3>
-						<p>
-							Объектно-ориентированное реактивное программирование (ООРП) — это комбинация
-							объектно-ориентированного подхода с реактивным. Вероятно, наиболее естественный
+						<p>Вероятно, наиболее естественный
 							способ сделать это состоит в том, что вместо методов и полей, у объектов есть
 							реакции, которые автоматически пересчитывают значения и другие реакции зависят от изменений этих значений.
 						</p>
@@ -177,16 +171,23 @@
 					<section>	
 						<h3>Функциональное реактивное программирование</h3>
 						<p>
-							Функциональное программирование является наиболее естественным базисом для реализации реактивной
+							Является наиболее естественным базисом для реализации реактивной
 							архитектуры, хорошо сочетаясь с параллелизмом.
-							
-							Функциональное реактивное программирование (ФРП) сформировалось в 1997 году, с предложением языка Fran.
-							Позже были разработаны такие языки как Fruit, FRP и RT-FRP, FAL, Frob, Fvision, Yampa.
-							Простейшее функциональное реактивное выражение имеет следующую форму:
-							```
-							b1 `until` e => b2
-							```
-							что буквально означает «вести себя как b1 до возникновения события e, после этого вести себя как b2».
+						</p>
+					</section>
+					<section>	
+						<h3>1997. Fran.</h3>
+						<p>Conal Elliott and Paul Hudak</p>
+					</section>
+					<section>
+						<blockquote>
+							Fran is a collection of data types and functions for composing richly interactive, multimedia animations.
+						</blockquote>
+					</section>
+					<section>	
+						<h3>b1 `until` e => b2</h3>
+						<p>
+							вести себя как b1 до возникновения события e, после этого вести себя как b2.
 						</p>
 					</section>
 					<!--<section>
@@ -209,11 +210,11 @@
 				</section>
 				<section>
 					<section>
-						<h2>ReactiveX</h2>
-						<p class="fragment">ReactiveX is more than an API, it's an idea and a breakthrough in programming. It has inspired several other APIs, frameworks, and even programming languages.</p>
+						<h2>Reactive Revolution</h2>
+						<blockquote  class="fragment">ReactiveX is more than an API, it's an idea and a breakthrough in programming. It has inspired several other APIs, frameworks, and even programming languages.</blockquote>
 					</section>
 					<section>
-						<h4 id="languages">Languages</h4>
+						<h4 id="languages">Языки</h4>
 
 						<ul>
 							<li>Java: <a href="https://github.com/ReactiveX/RxJava">RxJava</a></li>
@@ -233,7 +234,7 @@
 						</ul>
 					</section>
 					<section>
-						<h4 id="reactivex-for-platforms-and-frameworks">ReactiveX for platforms and frameworks</h4>
+						<h4 id="reactivex-for-platforms-and-frameworks">ReactiveX для платформ и фреймворков</h4>
 
 						<ul>
 							<li><a href="https://github.com/ReactiveX/RxNetty">RxNetty</a></li>
@@ -246,27 +247,6 @@
 					<section>
 						<h2>RxJS</h2>
 						<p>Set of libraries to compose asynchronous and event-based programs using observable collections and Array#extras style composition in JavaScript</p>
-					</section>
-					<section>
-						<h3>RxJS 4.0 vs 5.0</h3>
-						<p>RxJS 5 is a ground-up rewrite of RxJS that actually began development when RxJS was in 2.0. This new version of RxJS had
-three basic goals:</p>
-						<ol>
-							<li>Better performance</li>
-							<li>Better debugging</li>
-							<li>Compliance with the <a href="https://github.com/zenparsing/es-observable">ES7 Observable Spec</a></li>
-						</ol>
-					</section>
-					<section>
-						<h3>Differences:</h3>
-						<ul>
-							<li>Observer Interface Changes (.onNext(value) -> .next(value))</li>
-							<li>Subscription dispose is unsubscribe</li>
-							<li>Operators Renamed or Removed (flatMapLatest -> switchMap, where -> filter)</li>
-							<li>Operator Splits (map -> map and mapTo)</li>
-						</ul>
-						<br><br><br>
-						<a href="https://github.com/ReactiveX/rxjs/blob/master/MIGRATION.md" target="_blank"> Migrating from RxJS 4 to 5 </a>
 					</section>
 					<section>
 						<p>The essential concepts in RxJS which solve async event management are:</p>
@@ -422,7 +402,7 @@ corresponding output values.</p>
 					<section>
 						<h3>switchMap (flatMapLatest in RxJS 4)</h3>
 						<p>Maps each value to an Observable, then flattens all of
-these inner Observables using <a href="http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-switch">switch</a> <a href="http://plnkr.co/edit/W7ii4Tp7WtOBYhopJbO2?p=preview target="_blank"> Source </a></p>
+these inner Observables using <a href="http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-switch">switch</a> <a href="http://plnkr.co/edit/W7ii4Tp7WtOBYhopJbO2?p=preview" target="_blank"> Source </a></p>
 						<img style="height: 25rem;" src="images/switchMap.png">
 					</section>
 				</section>
