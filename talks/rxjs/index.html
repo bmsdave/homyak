@@ -28,6 +28,7 @@
 				<section>
 					<h1>RxJS</h1>
 					<h3>Реактивный подход в разработке</h3>
+					<img src="./images/stream.jpeg"></img>
 				</section>
 				<section>
 					<section>
@@ -249,15 +250,25 @@
 						<p>Set of libraries to compose asynchronous and event-based programs using observable collections and Array#extras style composition in JavaScript</p>
 					</section>
 					<section>
-						<p>The essential concepts in RxJS which solve async event management are:</p>
-						<ul>
-							<li class="fragment"><strong>Observable:</strong> represents the idea of an invokable collection of future values or events.</li>
-							<li class="fragment"><strong>Observer:</strong> is a collection of callbacks that knows how to listen to values delivered by the Observable.</li>
-							<li class="fragment"><strong>Subscription:</strong> represents the execution of an Observable, is primarily useful for cancelling the execution.</li>
-							<li class="fragment"><strong>Operators:</strong> are pure functions that enable a functional programming style of dealing with collections with operations like <code>map</code>, <code>filter</code>, <code>concat</code>, <code>flatMap</code>, etc.</li>
-							<li class="fragment"><strong>Subject:</strong> is the equivalent to an EventEmitter, and the only way of multicasting a value or event to multiple Observers.</li>
-							<li class="fragment"><strong>Schedulers:</strong> are centralized dispatchers to control concurrency, allowing us to coordinate when computation happens on e.g. <code>setTimeout</code> or <code>requestAnimationFrame</code> or others.</li>
-						</ul>
+						<h3>Observable, Observer, Subscriber, Operators</h3>
+					</section>
+					<section>
+						<p><strong>Observable</strong> — это объект или функция, которая выдает последовательности данных во времени.</p>
+					</section>
+					<section>				
+						<p><strong>Observer</strong> — это объект или функция, которая знает, как обрабатывать последовательности данных.</p>
+					</section>
+					<section>
+						<p><strong>Subscriber</strong> — это объект или функция, которая связывает Observable и Observer.</p>
+					</section>
+					<section>
+						<img src="./images/oos.png" height="100%" width="100%"></img>
+					</section>
+					<section>
+						<p><strong>Operators</strong>  — это функции, которыми можно преобразовывать данные между моментом, когда Observable их отправил, и моментом, когда подписчик их получил. </p>
+					</section>
+					<section>
+						<img src="./images/rx_operators.png" height="100%" width="100%"></img> 
 					</section>
 				</section>
 				<section>
@@ -268,7 +279,7 @@
 						</video>
 					</section>
 					<section>
-						<h3>Creating observable</h3>
+						<h3>Создание observable</h3>
 							<pre><code class="hljs javascript">
 var observable = Rx.Observable.create(function (observer) {
   observer.next(1);
@@ -282,7 +293,25 @@ var observable = Rx.Observable.create(function (observer) {
 							</code></pre>
 					</section>
 					<section>
-						<h3>Subscribing observable</h3>
+						<h3>Создание observable из event</h3>
+							<pre><code class="hljs javascript">
+window.onload = function() {
+  var input = document.querySelector('button');
+  
+  var observable = Rx.Observable.fromEvent(input,  'click');
+  
+  observable.subscribe((event) => {
+    console.log('Observable: ', event);
+  });
+
+  input.addEventListener('click', (event) => {
+    console.log('Event listener: ', event);
+  });
+}
+							</code></pre>
+					</section>
+					<section>
+						<h3>Подписка на observable</h3>
 							<pre><code class="hljs javascript">
 observable.subscribe(
   (x) => console.log('got value ' + x),
@@ -290,10 +319,9 @@ observable.subscribe(
   () => console.log('done')
 );
 							</code></pre>
-						<a href="https://embed.plnkr.co/X3785Q5lUq0SThnr2jOK/"  target="_blank">Source</a>
 					</section>
 					<section>
-						<h3>Observables can be created from:</h3>
+						<h3>Observables можно создать на:</h3>
 						<ul>
 							<li class="fragment">Array</li>
 							<li class="fragment">Array-like object (e.g. DOM elements)</li>
@@ -302,42 +330,34 @@ observable.subscribe(
 							<li class="fragment">Observable-like</li>
 							<li class="fragment">Promise</li>
 						</ul>
-						<a class="fragment" href="http://embed.plnkr.co/AANaOLWcVfStpzJMHhyh/" target="_blank"> Create from event </a>
 					</section>
 				</section>
 				<section>
-					<h2>Observable vs Promise</h2>
-					<ul>
-						<li class="fragment">Observables are cancellable</li>
-						<!--<li class="fragment">Observables can be retried</li>-->
-						<li class="fragment">Observables are not executed without observer</li>
-						<li class="fragment">Observables have operators</li>
-					</ul>
-					<a class="fragment" href="https://plnkr.co/edit/IqexueV4QKT7JgDOcudA?p=preview" target="_blank"> Source </a>
+					<a href="https://plnkr.co/edit/IqexueV4QKT7JgDOcudA?p=preview" target="_blank">Observable vs Promise [ng2]</a>
 				</section>
 				<section>
 					<section>
 						<h2>Cold vs hot observable</h2>
-						<p class="fragment">Producer - source of values for observable.</p>
+						<p class="fragment">Producer (изготовитель) - это некоторый поток, который генерирует данные и передает их в observable.</p>
 					</section>
 					<section>
 						<h3>Cold observable</h3>
 						<ol class="postList">
-							<li class="fragment">creates the producer</li>
-							<li class="fragment">activates the producer</li>
-							<li class="fragment">starts listening to the producer</li>
-							<li class="fragment">unicast</li></ol>
+							<li class="fragment">Создает producer</li>
+							<li class="fragment">Активирует producer</li>
+							<li class="fragment">Начинате слушать producer</li>
+							<li class="fragment">индивидуальный (unicast)</li></ol>
 					</section>
 					<section>
 						<h3>Hot observable</h3>
 						<ol class="postList">
-							<li class="fragment">shares a reference to a producer</li>
-							<li class="fragment">starts listening to the producer</li>
-							<li class="fragment">multicast</li>
+							<li class="fragment">ссылается producer</li>
+							<li class="fragment">Начинате слушать producer</li>
+							<li class="fragment">многоадресный (multicast)</li>
 					</section>
 					<section>
 						<div>
-							<h5> Cold observable </h5>
+							<h5> Cold observable <a href="https://plnkr.co/edit/s2vriUDpbtqEPk1t1IZv?p=preview" target="_blank">[ng2]</a></h5>
 							<pre><code class="hljs javascript">
 const source = new Observable((observer) => {
   const socket = new WebSocket('ws://someurl');
@@ -356,78 +376,131 @@ const source = new Observable((observer) => {
 });
 							</code></pre>
 						</div>
-						<a class="fragment" href="https://plnkr.co/edit/s2vriUDpbtqEPk1t1IZv?p=preview" target="_blank"> Http Angular 2 </a>
 					</section>
 				</section>
 				<section>
 					<section>
-						<h2>Most useful operators</h2>
+						<h2>Примеры операторов</h2>
+					</section>
+					<section>
+						<h3>concat</h3>
+						<p>когда важен порядок вывода последовательностей.</p>
+						<pre><code class="hljs javascript">
+const getPostOne$ = Rx.Observable.timer(3000).mapTo({id: 1});
+const getPostTwo$ = Rx.Observable.timer(1000).mapTo({id: 2});
+
+Rx.Observable
+	.concat(getPostOne$, getPostTwo$)
+	.subscribe(res => console.log(res));
+						</code></pre>
+						<img src="./images/concat.gif"/>
+					</section>
+					<section>
+						<h3>forkJoin</h3>
+						<p> аналог Promise.all()</p>
+						<pre><code class="hljs javascript">
+const getPostOne$ = Rx.Observable.timer(1000).mapTo({id: 1});
+const getPostTwo$ = Rx.Observable.timer(2000).mapTo({id: 2});
+
+Rx.Observable
+	.forkJoin(getPostOne$, getPostTwo$)
+	.subscribe(res => console.log(res))
+						</code></pre>
+						<img src="./images/forjoin.gif"/>
+					</section>
+					<section>
+						<h3>mergeMap</h3>
+						<p>чтобы все элементы внутренние Observable порождали событие основного.</p>
+						<pre><code class="hljs javascript">
+const post$ = Rx.Observable.of({id: 1});
+const getPostInfo$ = Rx.Observable
+	.timer(3000).mapTo({title: "Post title"});
+
+const posts$ = post$
+	.mergeMap(post => getPostInfo$)
+	.subscribe(res => console.log(res));
+						</code></pre>
+						<img src="./images/mergemap.gif"/>
+					</section>
+					<section>
+						<h3>pairwise</h3>
+						<p>возвращает не только текущее значение, но в месте с ним и предыдущее значение последовательности</p>
+						<pre><code class="hljs javascript">
+// Tracking the scroll delta
+Rx.Observable
+  .fromEvent(document, 'scroll')
+  .map(e => window.pageYOffset)
+  .pairwise()
+  .subscribe(pair => console.log(pair)); // pair[1] - pair[0]
+						</code></pre>
+						<img src="./images/pairwise.gif"/>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Еще несколько примеров операторов</h2>
 					</section>
 					<section>
 						<h3>map</h3>
-						<p>Like <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">Array.prototype.map()</a>,
-it passes each source value through a transformation function to get
-corresponding output values.</p>
 						<img src="images/map.png">
 					</section>
 					<section>
 						<h3>filter</h3>
-						<p>Like <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">Array.prototype.filter()</a>,
-							it only emits a value from the source if it passes a criterion function.
-						</p>
 						<img src="images/filter.png">
 					</section>
 					<section>
 						<h3>scan</h3>
-						<p>It's like reduce, but emits the current accumulation whenever the source emits a value.</p>
 						<img src="images/scan.png">
 					</section>
 					<section>
 						<h3>do</h3>
-						<p>Intercepts each emission on the source and runs a function, but returns an output which is identical to the source.</p>
 						<img src="images/do.png">
-						<a href="http://plnkr.co/edit/7JZyZeWHxIGQCMS5Zvud?p=preview" target="_blank"> Source </a>
 					</section>
 					<section>
 						<h3>withLatestFrom</h3>
-						<p>Whenever the source Observable emits a value, it computes a formula using that value plus the latest values from other input Observables, then emits the output of that formula.</p>
 						<img style="height: 25rem;" src="images/withLatestFrom.png">
 					</section>
 					<section>
 						<h3>combineLatest</h3>
-						<p>Whenever any input Observable emits a value, it computes a formula using the latest values from all the inputs, then emits the output of that formula.
-						<a href="http://plnkr.co/edit/ZUCMSiqhsKdawUieYf3C?p=preview" target="_blank"> Source </a> </p>
 						<img style="height: 25rem;" src="images/combineLatest.png">
-					</section>
-					<section>
-						<h3>switchMap (flatMapLatest in RxJS 4)</h3>
-						<p>Maps each value to an Observable, then flattens all of
-these inner Observables using <a href="http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-switch">switch</a> <a href="http://plnkr.co/edit/W7ii4Tp7WtOBYhopJbO2?p=preview" target="_blank"> Source </a></p>
-						<img style="height: 25rem;" src="images/switchMap.png">
 					</section>
 				</section>
 				<section>
-					<section>
-						<h2>What's next?</h2>
-						<ul>
-							<li class="fragment"><a href="https://gist.github.com/staltz/868e7e9bc2a7b8c1f754">The introduction to Reactive Programming you've been missing</a></li>
-							<li class="fragment"><a href="http://reactivex.io/learnrx/">Functional Programming in Javascript</a></li>
-							<li class="fragment"><a href="https://github.com/ngrx/router">Reactive Router for Angular 2</a></li>
-							<li class="fragment"><a href="https://github.com/ngrx/store">RxJS powered state management for Angular2 apps, inspired by Redux</a></li>
-							<li class="fragment"><a href="https://github.com/Reactive-Extensions/rx.angular.js/">AngularJS Bindings for RxJS</a></li>
-							<li class="fragment"><a href="http://staltz.com/">Andre Staltz webpage</a></li>
-							<li class="fragment"><a href="https://www.youtube.com/watch?v=COviCoUtwx4">Netflix JavaScript Talks - RxJS Version 5</a></li>
-						</ul>
-					</section>
-					<section>
-						<h2>Resources</h2>
-						<ul>
-							<li class="fragment"><a href="http://reactivex.io/">Official ReactiveX page</a></li>
-							<li class="fragment"><a href="http://reactivex.io/rxjs/">Official RxJS 5 documentation</a></li>
-							<li class="fragment"><a href="https://github.com/Reactive-Extensions/RxJS/tree/master/doc">Official RxJS 4 documentation on github repo</a></li>
-							<li class="fragment"><a href="http://rxmarbles.com/">Interactive diagrams of Rx Observables</a></li>
-						</ul>
-					</section>
+						<h3><a href="http://rxmarbles.com/">
+							Interactive diagrams of Rx Observables
+						</a></h3>
+				</section>
+				<section>
+					<h3>links</h3>
+					<ul>
+						<li><a href="https://www.youtube.com/watch?v=3cGKw9sxV_g">
+							holyJS 2016 Piter Виктор Русакович
+						</li>
+						<li><a href="http://stepansuvorov.com/blog/2017/03/rxjs-6-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%BE%D0%B2-%D0%BA%D0%BE%D1%82%D0%BE%D1%80%D1%8B%D0%B5-%D0%B2%D1%8B-%D0%B4%D0%BE%D0%BB%D0%B6%D0%BD%D1%8B-%D0%B7%D0%BD%D0%B0%D1%82%D1%8C/">
+							Rxjs: 6 операторов, которые вы должны знать
+						</a></li>
+						<li><a href="https://habrahabr.ru/post/325660/">
+							практический обзор FRP библиотек
+						</a></li>
+						<li><a href="https://dou.ua/lenta/articles/reactive-libraries/">
+							Реактивные библиотеки RX
+						</a></li>
+						<li><a href="http://xgrommx.github.io/rx-book/index.html">
+							rx-book Денис Стоянов
+						</a></li>
+						<li><a href="http://rxmarbles.com/">
+							Interactive diagrams of Rx Observables
+						</a></li>
+						<li><a href="https://egghead.io/lessons/rxjs-rxjs-observables-vs-promises">
+							Observables vs Promises
+						</a></li>
+						<li><a href="https://github.com/dakolech/ng2-rxjs-prolog">
+							ng2 rxjs prolog
+						</a></li>
+					</ul>
+				</section>
+				<section>
+					<h3>Спасибо! Вопросы?</h3>
 				</section>
 			</div>
 		</div>
