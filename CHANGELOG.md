@@ -1,3 +1,8 @@
+## 0.2.0
+
+ * remove SPA
+ * remove resume
+
 ## 0.1.0
 
  * init SPA 
