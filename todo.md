@@ -1,5 +1,10 @@
 # TODO:
 
+Добавить resume & cv на русском.
+Потом перевести на английский.
+Потом стилизовать.
+Потом привесить js
+
 ## code: 
   1. use vue.js
   2. use rxjs
@@ -27,7 +32,3 @@ https://egghead.io/lessons/rxjs-rxjs-observables-vs-promises
 http://dakolech.github.io/ng2-rxjs-prolog/#/8/1
 http://lab.hakim.se/reveal-js/#/
 https://github.com/dakolech/ng2-rxjs-prolog
-
-
-
-
